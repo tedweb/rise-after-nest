@@ -14,8 +14,7 @@ a { color:inherit; }
 .links { display:flex; gap:32px; text-transform:uppercase; font-weight:700; font-size:.74rem; letter-spacing:.14em; }
 .links a { text-decoration:none; }
 .hero { min-height:0; position:relative; overflow:hidden; background:#08628a; }
-.heroBannerLink { position:relative; z-index:4; display:block; width:100%; }
-.heroBannerDesktop { display:block; width:100%; height:auto; }
+.heroBannerDesktop { position:relative; z-index:1; display:block; width:100%; height:auto; }
 .heroImage { display:none; object-fit:cover; object-position:center 30%; }
 .heroShade,.heroCopy,.heroRoute { display:none; }
 .heroShade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(4,30,39,.9) 0%,rgba(4,30,39,.68) 38%,rgba(4,30,39,.12) 70%),linear-gradient(0deg,rgba(4,30,39,.48),transparent 50%); }
@@ -27,6 +26,7 @@ a { color:inherit; }
 .heroCopy>p:not(.eyebrow) { font-size:clamp(1rem,1.5vw,1.25rem); line-height:1.55; max-width:590px; }
 .button { display:inline-flex; gap:22px; align-items:center; margin-top:18px; padding:16px 21px; background:var(--orange); color:white; text-decoration:none; font-weight:800; font-size:.84rem; text-transform:uppercase; letter-spacing:.08em; border-radius:3px; }
 .button span { font-size:1.2rem; }
+.heroCta { position:absolute; z-index:6; left:clamp(18px,4vw,64px); bottom:clamp(18px,4vw,64px); margin:0; }
 .heroRoute { position:absolute; z-index:2; right:-2vw; top:7%; width:28vw; height:58%; border-left:3px dashed var(--orange); border-bottom:3px dashed var(--orange); border-radius:0 0 0 70%; transform:rotate(-8deg); opacity:.95; }
 .heroRoute span { position:absolute; left:-16px; top:-28px; color:var(--orange); font-size:2.2rem; transform:rotate(-8deg); }
 .intro { padding:110px 7vw; display:grid; grid-template-columns:.55fr 1fr 1.15fr; gap:6vw; align-items:center; }
@@ -38,7 +38,7 @@ a { color:inherit; }
 .intro figure { margin:0; position:relative; aspect-ratio:4/5; }
 .intro figure img { object-fit:cover; }
 .intro figcaption { position:absolute; bottom:0; left:0; background:var(--cream); padding:12px 18px 4px 0; text-transform:uppercase; font-size:.62rem; letter-spacing:.14em; font-weight:800; }
-@media(max-width:760px){ .links{gap:14px}.links a:nth-child(2){display:none}.hero{display:flex;align-items:flex-end;min-height:calc(100svh - 82px)}.heroBannerLink{display:none}.heroImage{display:block;object-position:61% center}.heroShade{display:block;background:linear-gradient(0deg,rgba(4,30,39,.96) 0%,rgba(4,30,39,.7) 44%,rgba(4,30,39,.08) 78%)}.heroCopy{display:block;padding:0 5vw 6vh;width:100%}.hero h1{font-size:clamp(3rem,14vw,4.7rem);line-height:.94;margin:14px 0 18px}.heroCopy>p:not(.eyebrow){max-width:92%;font-size:.95rem}.eyebrow{font-size:.62rem}.button{padding:14px 16px;font-size:.7rem}.heroRoute{display:none}.intro{grid-template-columns:1fr;padding:75px 6vw}.sectionLabel{margin:0}.intro figure{aspect-ratio:4/3;order:2}.intro>div{order:1}.brand{font-size:.88rem}.nav{padding:0 4vw} }
+@media(max-width:760px){ .links{gap:14px}.links a:nth-child(2){display:none}.hero{display:flex;align-items:flex-end;min-height:calc(100svh - 82px)}.heroBannerDesktop{display:none}.heroImage{display:block;object-position:61% center}.heroShade{display:block;background:linear-gradient(0deg,rgba(4,30,39,.96) 0%,rgba(4,30,39,.7) 44%,rgba(4,30,39,.08) 78%)}.heroCopy{display:block;padding:0 5vw 7.5rem;width:100%}.hero h1{font-size:clamp(3rem,14vw,4.7rem);line-height:.94;margin:14px 0 18px}.heroCopy>p:not(.eyebrow){max-width:92%;font-size:.95rem}.eyebrow{font-size:.62rem}.button{padding:14px 16px;font-size:.7rem}.heroCta{left:5vw;bottom:4vh}.heroRoute{display:none}.intro{grid-template-columns:1fr;padding:75px 6vw}.sectionLabel{margin:0}.intro figure{aspect-ratio:4/3;order:2}.intro>div{order:1}.brand{font-size:.88rem}.nav{padding:0 4vw} }
 .journey { background:var(--ink); color:white; padding:110px 7vw; }
 .journey header,.guide header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
 .journey h2,.guide h2,.about h2 { font:400 clamp(3rem,5vw,5.7rem)/.92 Georgia,serif; letter-spacing:-.05em; margin:0; }

@@ -17,25 +17,23 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="top">
-        <a className="heroBannerLink" href="#stories" aria-label="Explore the latest Rise After Nest travel story">
-          <Image
-            src="/og.png"
-            alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
-            width={1792}
-            height={1024}
-            priority
-            sizes="100vw"
-            className="heroBannerDesktop"
-          />
-        </a>
+        <Image
+          src="/og.png"
+          alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
+          width={1792}
+          height={1024}
+          priority
+          sizes="100vw"
+          className="heroBannerDesktop"
+        />
         <Image src="/images/nassau-diver.jpg" alt="Tara scuba diving in the clear blue water near Nassau" fill priority sizes="100vw" className="heroImage" />
         <div className="heroShade" />
         <div className="heroCopy">
           <p className="eyebrow">A new chapter. A wide-open world.</p>
           <h1>The nest is empty.<br />The itinerary <em>isn’t.</em></h1>
           <p>We’re Doug &amp; Tara—chasing warm water, big views, and the kind of stories you can’t bring home in a suitcase.</p>
-          <a className="button" href="#stories">Dive into our latest trip <span>↘</span></a>
         </div>
+        <a className="button heroCta" href="#stories">Dive into our latest trip <span>↘</span></a>
         <div className="heroRoute" aria-hidden="true"><span>✈</span></div>
       </section>
 
