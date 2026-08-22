@@ -36,7 +36,6 @@ export default function Home() {
           <a className="button" href="#stories">Dive into our latest trip <span>↘</span></a>
         </div>
         <div className="heroRoute" aria-hidden="true"><span>✈</span></div>
-        <div className="stamp" aria-hidden="true">NASSAU<br /><strong>25° 02′ N</strong><br />MAY 2026</div>
       </section>
 
       <section className="intro" id="stories">
