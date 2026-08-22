@@ -21,10 +21,11 @@ export default function Home() {
         <div className="heroShade" />
         <div className="heroCopy">
           <p className="eyebrow">A new chapter. A wide-open world.</p>
-          <h1>The nest is empty.<br />The itinerary isn’t.</h1>
+          <h1>The nest is empty.<br />The itinerary <em>isn’t.</em></h1>
           <p>We’re Doug &amp; Tara—chasing warm water, big views, and the kind of stories you can’t bring home in a suitcase.</p>
           <a className="button" href="#stories">Dive into our latest trip <span>↘</span></a>
         </div>
+        <div className="heroRoute" aria-hidden="true"><span>✈</span></div>
         <div className="stamp" aria-hidden="true">NASSAU<br /><strong>25° 02′ N</strong><br />MAY 2026</div>
       </section>
 

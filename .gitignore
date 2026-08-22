@@ -31,6 +31,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# recoverable development cache retained during project relocation
+/.runtime-cache-from-move/
+
 # vercel
 .vercel
 
