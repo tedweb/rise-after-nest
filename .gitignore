@@ -31,6 +31,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# recoverable development cache retained during project relocation
+/.runtime-cache-from-move/
+
 # vercel
 .vercel
 
@@ -38,3 +41,9 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+
+# Temporary publishing packages
+/.publish-git/
+/.publish-stage-*/
+/rise-site-*.tar.gz

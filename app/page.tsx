@@ -17,15 +17,24 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="top">
+        <Image
+          src="/og.png"
+          alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
+          width={1792}
+          height={1024}
+          priority
+          sizes="100vw"
+          className="heroBannerDesktop"
+        />
         <Image src="/images/nassau-diver.jpg" alt="Tara scuba diving in the clear blue water near Nassau" fill priority sizes="100vw" className="heroImage" />
         <div className="heroShade" />
         <div className="heroCopy">
           <p className="eyebrow">A new chapter. A wide-open world.</p>
-          <h1>The nest is empty.<br />The itinerary isn’t.</h1>
+          <h1>The nest is empty.<br />The itinerary <em>isn’t.</em></h1>
           <p>We’re Doug &amp; Tara—chasing warm water, big views, and the kind of stories you can’t bring home in a suitcase.</p>
-          <a className="button" href="#stories">Dive into our latest trip <span>↘</span></a>
         </div>
-        <div className="stamp" aria-hidden="true">NASSAU<br /><strong>25° 02′ N</strong><br />MAY 2026</div>
+        <a className="button heroCta" href="#stories">Dive into our latest trip <span>↘</span></a>
+        <div className="heroRoute" aria-hidden="true"><span>✈</span></div>
       </section>
 
       <section className="intro" id="stories">
