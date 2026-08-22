@@ -13,8 +13,11 @@ a { color:inherit; }
 .sunmark i { position:absolute; width:25px; height:9px; border-top:2px solid var(--ink); border-radius:50%; bottom:5px; }
 .links { display:flex; gap:32px; text-transform:uppercase; font-weight:700; font-size:.74rem; letter-spacing:.14em; }
 .links a { text-decoration:none; }
-.hero { min-height:calc(100vh - 82px); position:relative; display:flex; align-items:flex-end; overflow:hidden; }
-.heroImage { object-fit:cover; object-position:center 30%; }
+.hero { min-height:0; aspect-ratio:1792/1024; position:relative; display:flex; align-items:flex-end; overflow:hidden; background:#08628a; }
+.heroBannerLink { position:absolute; inset:0; z-index:4; display:block; }
+.heroBannerDesktop { object-fit:cover; object-position:center; }
+.heroImage { display:none; object-fit:cover; object-position:center 30%; }
+.heroShade,.heroCopy,.heroRoute,.stamp { display:none; }
 .heroShade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(4,30,39,.9) 0%,rgba(4,30,39,.68) 38%,rgba(4,30,39,.12) 70%),linear-gradient(0deg,rgba(4,30,39,.48),transparent 50%); }
 .heroCopy { position:relative; z-index:3; width:min(900px,90%); color:white; padding:0 0 9vh 5vw; }
 .eyebrow,.sectionLabel { text-transform:uppercase; letter-spacing:.22em; font-weight:800; font-size:.73rem; }
@@ -37,7 +40,7 @@ a { color:inherit; }
 .intro figure { margin:0; position:relative; aspect-ratio:4/5; }
 .intro figure img { object-fit:cover; }
 .intro figcaption { position:absolute; bottom:0; left:0; background:var(--cream); padding:12px 18px 4px 0; text-transform:uppercase; font-size:.62rem; letter-spacing:.14em; font-weight:800; }
-@media(max-width:760px){ .links{gap:14px}.links a:nth-child(2){display:none}.hero{min-height:calc(100svh - 82px)}.heroImage{object-position:61% center}.heroShade{background:linear-gradient(0deg,rgba(4,30,39,.96) 0%,rgba(4,30,39,.7) 44%,rgba(4,30,39,.08) 78%)}.heroCopy{padding:0 5vw 6vh;width:100%}.hero h1{font-size:clamp(3rem,14vw,4.7rem);line-height:.94;margin:14px 0 18px}.heroCopy>p:not(.eyebrow){max-width:92%;font-size:.95rem}.eyebrow{font-size:.62rem}.button{padding:14px 16px;font-size:.7rem}.stamp,.heroRoute{display:none}.intro{grid-template-columns:1fr;padding:75px 6vw}.sectionLabel{margin:0}.intro figure{aspect-ratio:4/3;order:2}.intro>div{order:1}.brand{font-size:.88rem}.nav{padding:0 4vw} }
+@media(max-width:760px){ .links{gap:14px}.links a:nth-child(2){display:none}.hero{aspect-ratio:auto;min-height:calc(100svh - 82px)}.heroBannerLink{display:none}.heroImage{display:block;object-position:61% center}.heroShade{display:block;background:linear-gradient(0deg,rgba(4,30,39,.96) 0%,rgba(4,30,39,.7) 44%,rgba(4,30,39,.08) 78%)}.heroCopy{display:block;padding:0 5vw 6vh;width:100%}.hero h1{font-size:clamp(3rem,14vw,4.7rem);line-height:.94;margin:14px 0 18px}.heroCopy>p:not(.eyebrow){max-width:92%;font-size:.95rem}.eyebrow{font-size:.62rem}.button{padding:14px 16px;font-size:.7rem}.stamp,.heroRoute{display:none}.intro{grid-template-columns:1fr;padding:75px 6vw}.sectionLabel{margin:0}.intro figure{aspect-ratio:4/3;order:2}.intro>div{order:1}.brand{font-size:.88rem}.nav{padding:0 4vw} }
 .journey { background:var(--ink); color:white; padding:110px 7vw; }
 .journey header,.guide header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
 .journey h2,.guide h2,.about h2 { font:400 clamp(3rem,5vw,5.7rem)/.92 Georgia,serif; letter-spacing:-.05em; margin:0; }

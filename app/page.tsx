@@ -17,6 +17,16 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="top">
+        <a className="heroBannerLink" href="#stories" aria-label="Explore the latest Rise After Nest travel story">
+          <Image
+            src="/og.png"
+            alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
+            fill
+            priority
+            sizes="100vw"
+            className="heroBannerDesktop"
+          />
+        </a>
         <Image src="/images/nassau-diver.jpg" alt="Tara scuba diving in the clear blue water near Nassau" fill priority sizes="100vw" className="heroImage" />
         <div className="heroShade" />
         <div className="heroCopy">
