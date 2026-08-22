@@ -21,7 +21,8 @@ export default function Home() {
           <Image
             src="/og.png"
             alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
-            fill
+            width={1792}
+            height={1024}
             priority
             sizes="100vw"
             className="heroBannerDesktop"
