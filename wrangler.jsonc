@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "site-creator-vinext-starter",
+  "name": "rise-after-nest",
   "compatibility_date": "2026-08-23",
   "compatibility_flags": [
     "nodejs_compat"
