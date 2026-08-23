@@ -11,22 +11,9 @@
     "not_found_handling": "none",
     "binding": "ASSETS"
   },
-  "cache": {
-    "enabled": true
-  },
-  "images": {
-    "binding": "IMAGES"
-  },
-  "kv_namespaces": [
-    {
-      "binding": "VINEXT_KV_CACHE",
-      "id": "<your-kv-namespace-id>"
-    }
-  ],
   "routes": [
-    // Pattern 1: Exact matching for a specific subdomain
     {
-      "pattern": "://riseafternest.com*",
+      "pattern": "riseafternest.com",
       "custom_domain": true
     }
   ]
