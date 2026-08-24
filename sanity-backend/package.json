@@ -1,0 +1,27 @@
+{
+  "name": "sanity-backend",
+  "version": "1.0.0",
+  "description": "Sanity Studio and content migration tools for Rise After Nest",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "seed:prepare": "node migration/scripts/create-seed.mjs",
+    "seed:import": "npm run seed:prepare && sanity dataset import migration/generated/seed.ndjson --dataset production --replace",
+    "validate": "sanity documents validate --dataset production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sanity/vision": "^6.10.1",
+    "sanity": "^6.10.1",
+    "styled-components": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "typescript": "^7.0.2"
+  }
+}
