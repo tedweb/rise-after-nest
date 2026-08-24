@@ -1,7 +1,17 @@
 import Image from "next/image";
 import { TripExplorer } from "./components/TripExplorer";
+import {getLatestPost, imageUrl} from "./lib/sanity";
 
-export default function Home() {
+export default async function Home() {
+  const latestPost = await getLatestPost();
+  const story = latestPost ?? {
+    title: "Six Days in Paradise",
+    slug: "six-days-in-paradise",
+    excerpt: "From the easy rhythm of Sandals Royal Bahamian to the pulse-quickening moment a reef shark glided into view, Nassau gave our next chapter one unforgettable opening scene.",
+    publishedAt: "2026-08-23T12:00:00.000Z",
+    mainImage: undefined,
+  };
+  const storyImage = story.mainImage?.asset ? imageUrl(story.mainImage).width(900).height(1125).fit("crop").auto("format").url() : "/images/nassau-shark.jpg";
   return (
     <main>
       <nav className="nav" aria-label="Main navigation">
@@ -40,13 +50,14 @@ export default function Home() {
       <section className="intro" id="stories">
         <p className="sectionLabel">LATEST FIELD NOTE · 01</p>
         <div>
-          <h2>Six days in<br /><i>paradise.</i></h2>
-          <p>From the easy rhythm of Sandals Royal Bahamian to the pulse-quickening moment a reef shark glided into view, Nassau gave our next chapter one unforgettable opening scene.</p>
-          <a href="#journey">Read the Nassau story →</a>
+          <h2>{story.title}</h2>
+          <p>{story.excerpt}</p>
+          <a href={`/blog/${story.slug}`}>Read the Nassau story →</a>
         </div>
         <figure>
-          <Image src="/images/nassau-shark.jpg" alt="A reef shark swimming over the ocean floor near Nassau" fill sizes="(max-width: 800px) 90vw, 38vw" />
-          <figcaption>Below the surface · New Providence</figcaption>
+          {/* Sanity's image CDN handles crop and format negotiation for editor-managed images. */}
+          <img src={storyImage} alt={story.mainImage?.alt ?? "A reef shark swimming over the ocean floor near Nassau"} />
+          <figcaption>{story.mainImage?.caption ?? "Below the surface · New Providence"}</figcaption>
         </figure>
       </section>
       <TripExplorer />
