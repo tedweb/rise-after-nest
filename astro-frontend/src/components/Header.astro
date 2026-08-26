@@ -1,0 +1,17 @@
+---
+type Props = {home?: boolean};
+const {home = false} = Astro.props;
+const prefix = home ? "" : "/";
+---
+
+<nav class="nav" aria-label="Main navigation">
+  <a class="brand" href={`${prefix}#top`} aria-label="Rise After Nest home">
+    <span class="sunmark" aria-hidden="true"><i></i></span>
+    <span>RISE <em>AFTER</em> NEST</span>
+  </a>
+  <div class="links">
+    <a href={`${prefix}#stories`}>Stories</a>
+    {home && <a href="#journey">Our map</a>}
+    <a href={`${prefix}#about`}>About</a>
+  </div>
+</nav>

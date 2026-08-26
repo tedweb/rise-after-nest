@@ -1,0 +1,59 @@
+---
+import {PortableText} from "astro-portabletext";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import PortableImage from "../../components/PortableImage.astro";
+import PortableLink from "../../components/PortableLink.astro";
+import {getPost, getPostSlugs, imageUrl, type Post} from "../../lib/sanity";
+
+export async function getStaticPaths() {
+  const slugs = await getPostSlugs();
+  const posts = await Promise.all(slugs.map(async ({slug}) => ({slug, post: await getPost(slug)})));
+
+  return posts
+    .filter((entry): entry is {slug: string; post: Post} => Boolean(entry.post))
+    .map(({slug, post}) => ({params: {slug}, props: {post}}));
+}
+
+type Props = {post: Post};
+const {post} = Astro.props;
+const hero = post.mainImage?.asset
+  ? imageUrl(post.mainImage).width(1800).height(1000).fit("crop").auto("format").url()
+  : "/images/nassau-shark.jpg";
+const socialImage = post.mainImage?.asset
+  ? imageUrl(post.mainImage).width(1200).height(630).fit("crop").auto("format").url()
+  : "/og.png";
+const title = post.seo?.metaTitle ?? `${post.title} | Rise After Nest`;
+const description = post.seo?.metaDescription ?? post.excerpt;
+const canonical = post.seo?.canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).href;
+const publishedDate = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(new Date(post.publishedAt));
+const components = {
+  type: {image: PortableImage},
+  mark: {link: PortableLink},
+};
+---
+
+<BaseLayout {title} {description} {canonical} image={socialImage} type="article" publishedTime={post.publishedAt}>
+  <main class="postPage">
+    <Header />
+    <article>
+      <header class="postHeader">
+        <p class="sectionLabel">{post.categories?.join(" · ") || "FIELD NOTE"}</p>
+        <h1>{post.title}</h1>
+        <p class="postDeck">{post.excerpt}</p>
+        <div class="postByline">By {post.author ?? "Doug & Tara Markott"} · {publishedDate}</div>
+      </header>
+      <figure class="postHero">
+        <img src={hero} alt={post.mainImage?.alt ?? post.title} />
+        {post.mainImage?.caption && <figcaption>{post.mainImage.caption}</figcaption>}
+      </figure>
+      <div class="postBody"><PortableText value={post.body ?? []} {components} /></div>
+    </article>
+    <footer class="postFooter"><a href="/">← Back to Rise After Nest</a></footer>
+  </main>
+</BaseLayout>

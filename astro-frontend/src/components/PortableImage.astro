@@ -1,0 +1,13 @@
+---
+import {imageUrl} from "../lib/sanity";
+
+const {node} = Astro.props;
+const src = node?.asset ? imageUrl(node).width(1200).auto("format").url() : null;
+---
+
+{src && (
+  <figure>
+    <img src={src} alt={node.alt ?? ""} loading="lazy" />
+    {node.caption && <figcaption>{node.caption}</figcaption>}
+  </figure>
+)}

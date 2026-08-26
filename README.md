@@ -4,7 +4,8 @@ This monorepo contains the public travel site and its Sanity content studio.
 
 ## Projects
 
-- `astro-frontend` — the Vinext/Next-style frontend deployed with Codex Sites.
+- `astro-frontend` — the production Astro site deployed to Cloudflare Workers.
+- `nextjs-frontend` — the preserved Vinext/Next.js implementation for migration reference and rollback.
 - `sanity-backend` — Sanity Studio, schemas, migration scripts, and content validation.
 
 ## Development
@@ -26,4 +27,4 @@ Build both projects with `npm run build`. The public Sanity project ID and datas
 
 ## Publishing
 
-The frontend is published through Codex Sites. Deploy the content Studio from `sanity-backend` with `npm run deploy --workspace sanity-backend`.
+Deploy the Astro frontend to Cloudflare Workers from the `astro-frontend` root. Deploy the content Studio from `sanity-backend` with `npm run deploy --workspace sanity-backend`. Published Sanity content should trigger a Cloudflare build through a deploy hook.

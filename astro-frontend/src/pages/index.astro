@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import TripExplorer from "../components/TripExplorer";
+import {getLatestPost, imageUrl} from "../lib/sanity";
+
+const latestPost = await getLatestPost();
+const story = latestPost ?? {
+  title: "Six Days in Paradise",
+  slug: "six-days-in-paradise",
+  excerpt: "From the easy rhythm of Sandals Royal Bahamian to the pulse-quickening moment a reef shark glided into view, Nassau gave our next chapter one unforgettable opening scene.",
+  publishedAt: "2026-08-23T12:00:00.000Z",
+  mainImage: undefined,
+};
+const storyImage = story.mainImage?.asset
+  ? imageUrl(story.mainImage).width(900).height(1125).fit("crop").auto("format").url()
+  : "/images/nassau-shark.jpg";
+---
+
+<BaseLayout>
+  <main>
+    <Header home />
+
+    <section class="hero" id="top">
+      <img
+        src="/og.png"
+        alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
+        width="1792"
+        height="1024"
+        fetchpriority="high"
+        class="heroBannerDesktop"
+      />
+      <img src="/images/nassau-diver.jpg" alt="Tara scuba diving in the clear blue water near Nassau" width="1536" height="1024" fetchpriority="high" class="heroImage" />
+      <div class="heroShade"></div>
+      <div class="heroCopy">
+        <p class="eyebrow">A new chapter. A wide-open world.</p>
+        <h1>The nest is empty.<br />The itinerary <em>isn’t.</em></h1>
+        <p>We’re Doug &amp; Tara—chasing warm water, big views, and the kind of stories you can’t bring home in a suitcase.</p>
+      </div>
+      <a class="button heroCta" href="#stories">Dive into our latest trip <span>↘</span></a>
+      <div class="heroRoute" aria-hidden="true"><span>✈</span></div>
+    </section>
+
+    <section class="intro" id="stories">
+      <p class="sectionLabel">LATEST FIELD NOTE · 01</p>
+      <div>
+        <h2>{story.title}</h2>
+        <p>{story.excerpt}</p>
+        <a href={`/blog/${story.slug}`}>Read the Nassau story →</a>
+      </div>
+      <figure>
+        <img src={storyImage} alt={story.mainImage?.alt ?? "A reef shark swimming over the ocean floor near Nassau"} loading="lazy" />
+        <figcaption>{story.mainImage?.caption ?? "Below the surface · New Providence"}</figcaption>
+      </figure>
+    </section>
+
+    <TripExplorer client:visible />
+
+    <section class="storyBand">
+      <div class="storyPhoto"><img src="/images/nassau-wreck.jpg" alt="Doug and Tara exploring an underwater wreck near Nassau" loading="lazy" /></div>
+      <blockquote>“This is exactly what we meant by <i>after nest.</i> Not slowing down—finally having room to go deeper.”<cite>— Doug &amp; Tara</cite></blockquote>
+    </section>
+
+    <section class="guide">
+      <header><p class="sectionLabel">THE QUICK TAKE</p><h2>Nassau,<br /><i>unpacked.</i></h2></header>
+      <div class="guideGrid">
+        <article><span>01</span><h3>Stay</h3><p>Sandals Royal Bahamian</p><small>Couples-only resort · Cable Beach</small></article>
+        <article><span>02</span><h3>Dive</h3><p>Reefs, wrecks &amp; sharks</p><small>Clear water · Experienced guides</small></article>
+        <article><span>03</span><h3>Pack</h3><p>Reef-safe essentials</p><small>Sun shirt · Dive log · Curiosity</small></article>
+        <article><span>04</span><h3>Budget</h3><p>Prices in US dollars</p><small>Resort package + excursions</small></article>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div><p class="sectionLabel">MEET THE MARKOTTS</p><h2>Still curious.<br />Now <i>carry-on only.</i></h2></div>
+      <p>We’re Doug and Tara Markott—a married team turning the empty-nest years into a passport full of shared stories. We travel together, write together, and share the honest details that help other couples take the leap.</p>
+    </section>
+
+    <Footer />
+  </main>
+</BaseLayout>
