@@ -1,0 +1,17 @@
+---
+import {imageUrl, type PostSummary} from "../lib/sanity";
+type Props = {story: PostSummary; image?: string; tag?: string; featured?: boolean};
+const {story, image, tag, featured = false} = Astro.props;
+const src = story.mainImage?.asset
+  ? imageUrl(story.mainImage).width(featured ? 1300 : 900).height(featured ? 850 : 650).fit("crop").auto("format").url()
+  : image ?? "/images/nassau-shark.jpg";
+---
+<article class:list={["story-card", {featured}]}>
+  <a class="story-card-image" href={`/blog/${story.slug}`}><img src={src} alt={story.mainImage?.alt ?? story.title} loading="lazy" /></a>
+  <div class="story-card-copy">
+    <span class="pill">{tag ?? story.categories?.[0] ?? "Travel journal"}</span>
+    <h3><a href={`/blog/${story.slug}`}>{story.title}</a></h3>
+    <p>{story.excerpt}</p>
+    <a class="arrow-link" href={`/blog/${story.slug}`}>Read the story ↗</a>
+  </div>
+</article>

@@ -1,7 +1,7 @@
 import {sanityClient} from "sanity:client";
 import {createImageUrlBuilder} from "@sanity/image-url";
 import type {TypedObject} from "astro-portabletext/types";
-import {LATEST_POST_QUERY, POST_QUERY, POST_SLUGS_QUERY} from "./queries";
+import {LATEST_POST_QUERY, POSTS_QUERY, POST_QUERY, POST_SLUGS_QUERY} from "./queries";
 
 export type SanityImage = {
   asset?: {_ref?: string; _id?: string};
@@ -15,6 +15,7 @@ export type PostSummary = {
   excerpt: string;
   publishedAt: string;
   mainImage?: SanityImage;
+  categories?: string[];
 };
 
 export type Post = PostSummary & {
@@ -40,6 +41,15 @@ export async function getLatestPost(): Promise<PostSummary | null> {
   } catch (error) {
     console.warn("Unable to load the latest Sanity post during the build.", error);
     return null;
+  }
+}
+
+export async function getPosts(): Promise<PostSummary[]> {
+  try {
+    return await sanityClient.fetch(POSTS_QUERY);
+  } catch (error) {
+    console.warn("Unable to load Sanity posts during the build.", error);
+    return [];
   }
 }
 

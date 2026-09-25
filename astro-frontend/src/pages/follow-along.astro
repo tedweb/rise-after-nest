@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"; import Header from "../components/Header.astro"; import Footer from "../components/Footer.astro"; import PageHero from "../components/PageHero.astro";
+const channels=[
+ {name:"YouTube",handle:"@RiseAfterNest",href:"https://www.youtube.com/@RiseAfterNest",note:"Full trip videos and Rise Reviews",color:"coral"},
+ {name:"Instagram",handle:"@riseafternest",href:"https://www.instagram.com/riseafternest?stkn=MW96YW1tMWMya3d0cA%3D%3D&utm_source=qr",note:"Photos, reels, and notes from the road",color:"yellow"},
+ {name:"Facebook",handle:"Rise After Nest",href:"https://www.facebook.com/share/1JafqwD9PU/?mibextid=wwXIfr",note:"New stories and travel conversations",color:"green"},
+ {name:"TikTok",handle:"@riseafternest",href:"https://www.tiktok.com/@riseafternest?_r=1&_t=ZP-99p0SdKEn9y",note:"Quick tips and moments along the way",color:"lavender"},
+];
+---
+<BaseLayout title="Follow Along | Rise After Nest" description="Follow Doug and Tara’s Rise After Nest adventures across YouTube, Instagram, Facebook, and TikTok."><Header /><main><PageHero eyebrow="COME ALONG FOR THE RIDE" title="Meet us somewhere new." intro="Pick your favorite corner of the internet and follow the next chapter as it unfolds." color="yellow"/><section class="page-section social-directory">{channels.map(channel=><a class:list={["channel-card",channel.color]} href={channel.href} target="_blank" rel="noopener noreferrer"><span>{channel.name}</span><h2>{channel.handle}</h2><p>{channel.note}</p><b>Follow along ↗</b></a>)}</section><section class="contact-note"><span class="script">Want to say hello?</span><h2>We’d love to hear where you’re headed next.</h2><a class="primary-button" href="mailto:hello@riseafternest.com">Email Doug &amp; Tara ↗</a></section></main><Footer /></BaseLayout>

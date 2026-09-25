@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+import {destinations, photos} from "../../lib/site";
+---
+<BaseLayout title="Destinations | Rise After Nest" description="Explore the destinations Doug and Tara have visited together.">
+  <Header /><main><PageHero eyebrow="POSTCARDS FROM THE ROAD" title="Places we’ve loved—and learned from." intro="Every destination gets its own scrapbook: where we stayed, what surprised us, and what we’d tell a friend." color="coral" />
+    <section class="page-section destination-index"><div class="destination-grid large">{destinations.map((place,index) => <a class:list={["destination-card", {tilted:index%2}]} href={`/destinations/${place.slug}/`}><img src={place.image} alt={`${place.name}, ${place.country}`}/><span class="destination-stamp">{place.stamp}</span><div><small>{place.country}</small><h2>{place.name}</h2><p>{place.note}</p><b>Explore {place.name} ↗</b></div></a>)}<article class="coming-card"><span class="script">Where to next?</span><h2>The map has plenty of room.</h2><p>More destinations will join the scrapbook as Doug and Tara keep exploring.</p><img src={photos.road} alt="Open mountain road" loading="lazy"/></article></div></section>
+  </main><Footer />
+</BaseLayout>

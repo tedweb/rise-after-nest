@@ -10,6 +10,17 @@ export const LATEST_POST_QUERY = defineQuery(`
   }
 `);
 
+export const POSTS_QUERY = defineQuery(`
+  *[_type == "post" && defined(slug.current)] | order(publishedAt desc, _id asc){
+    title,
+    "slug": slug.current,
+    excerpt,
+    publishedAt,
+    mainImage,
+    "categories": categories[]->title
+  }
+`);
+
 export const POST_QUERY = defineQuery(`
   *[_type == "post" && slug.current == $slug][0]{
     title,

@@ -2,81 +2,52 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import TripExplorer from "../components/TripExplorer";
-import {getLatestPost, imageUrl} from "../lib/sanity";
+import StoryCard from "../components/StoryCard.astro";
+import {getPosts} from "../lib/sanity";
+import {destinations, fallbackStory} from "../lib/site";
 
-const latestPost = await getLatestPost();
-const story = latestPost ?? {
-  title: "Six Days in Paradise",
-  slug: "six-days-in-paradise",
-  excerpt: "From the easy rhythm of Sandals Royal Bahamian to the pulse-quickening moment a reef shark glided into view, Nassau gave our next chapter one unforgettable opening scene.",
-  publishedAt: "2026-08-23T12:00:00.000Z",
-  mainImage: undefined,
-};
-const storyImage = story.mainImage?.asset
-  ? imageUrl(story.mainImage).width(900).height(1125).fit("crop").auto("format").url()
-  : "/images/nassau-shark.jpg";
+const posts = await getPosts();
+const latest = posts[0] ?? fallbackStory;
 ---
-
-<BaseLayout>
+<BaseLayout title="Rise After Nest | Travel stories for the next chapter" description="Doug and Tara share empty-nest travel stories, honest Rise Reviews, memorable stays, and new adventures together.">
+  <Header />
   <main>
-    <Header home />
-
-    <section class="hero" id="top">
-      <img
-        src="/og.png"
-        alt="Rise After Nest. The nest is empty. The itinerary isn’t. Tara scuba diving in clear Bahamian water."
-        width="1792"
-        height="1024"
-        fetchpriority="high"
-        class="heroBannerDesktop"
-      />
-      <img src="/images/nassau-diver.jpg" alt="Tara scuba diving in the clear blue water near Nassau" width="1536" height="1024" fetchpriority="high" class="heroImage" />
-      <div class="heroShade"></div>
-      <div class="heroCopy">
-        <p class="eyebrow">A new chapter. A wide-open world.</p>
-        <h1>The nest is empty.<br />The itinerary <em>isn’t.</em></h1>
-        <p>We’re Doug &amp; Tara—chasing warm water, big views, and the kind of stories you can’t bring home in a suitcase.</p>
+    <section class="scrap-hero">
+      <div class="hero-copy">
+        <span class="script">Two tickets to whatever’s next.</span>
+        <h1>Grown kids.<br/>Big world.<br/><em>Let’s go!</em></h1>
+        <p>We’re Doug &amp; Tara, collecting new favorite places, honest travel lessons, and plenty of “remember when?” moments.</p>
+        <a class="primary-button" href="/journal/">Open our travel journal ↗</a>
+        <span class="doodle">less routine, more “why not?” ⤴</span>
       </div>
-      <a class="button heroCta" href="#stories">Dive into our latest trip <span>↘</span></a>
-      <div class="heroRoute" aria-hidden="true"><span>✈</span></div>
-    </section>
-
-    <section class="intro" id="stories">
-      <p class="sectionLabel">LATEST FIELD NOTE · 01</p>
-      <div>
-        <h2>{story.title}</h2>
-        <p>{story.excerpt}</p>
-        <a href={`/blog/${story.slug}`}>Read the Nassau story →</a>
-      </div>
-      <figure>
-        <img src={storyImage} alt={story.mainImage?.alt ?? "A reef shark swimming over the ocean floor near Nassau"} loading="lazy" />
-        <figcaption>{story.mainImage?.caption ?? "Below the surface · New Providence"}</figcaption>
-      </figure>
-    </section>
-
-    <TripExplorer client:visible />
-
-    <section class="storyBand">
-      <div class="storyPhoto"><img src="/images/nassau-wreck.jpg" alt="Doug and Tara exploring an underwater wreck near Nassau" loading="lazy" /></div>
-      <blockquote>“This is exactly what we meant by <i>after nest.</i> Not slowing down—finally having room to go deeper.”<cite>— Doug &amp; Tara</cite></blockquote>
-    </section>
-
-    <section class="guide">
-      <header><p class="sectionLabel">THE QUICK TAKE</p><h2>Nassau,<br /><i>unpacked.</i></h2></header>
-      <div class="guideGrid">
-        <article><span>01</span><h3>Stay</h3><p>Sandals Royal Bahamian</p><small>Couples-only resort · Cable Beach</small></article>
-        <article><span>02</span><h3>Dive</h3><p>Reefs, wrecks &amp; sharks</p><small>Clear water · Experienced guides</small></article>
-        <article><span>03</span><h3>Pack</h3><p>Reef-safe essentials</p><small>Sun shirt · Dive log · Curiosity</small></article>
-        <article><span>04</span><h3>Budget</h3><p>Prices in US dollars</p><small>Resort package + excursions</small></article>
+      <div class="hero-collage" aria-label="A scrapbook of travel memories">
+        <span class="postage">NEXT CHAPTER<br/><b>✳</b><br/>POSTAGE PAID</span>
+        <figure class="polaroid photo-one"><img src="/images/homepage_candidate1.jpg" alt="Doug and Tara scuba diving together" fetchpriority="high" /><figcaption>Going beneath the surface ♡</figcaption></figure>
+        <figure class="polaroid photo-two"><img src="/images/homepage_candidate4.jpg" alt="Doug and Tara together on a cruise ship" fetchpriority="high" /><figcaption>Out of office. Into this.</figcaption></figure>
+        <span class="sun-sticker">GOOD<br/>DAYS<br/>AHEAD</span>
       </div>
     </section>
 
-    <section class="about" id="about">
-      <div><p class="sectionLabel">MEET THE MARKOTTS</p><h2>Still curious.<br />Now <i>carry-on only.</i></h2></div>
-      <p>We’re Doug and Tara Markott—a married team turning the empty-nest years into a passport full of shared stories. We travel together, write together, and share the honest details that help other couples take the leap.</p>
+    <div class="ticker" aria-hidden="true">NEW PLACES ✳ LITTLE JOYS ✳ GOOD FOOD ✳ TOGETHER TIME ✳ NEW PLACES ✳ LITTLE JOYS ✳</div>
+
+    <section class="home-latest page-section">
+      <header class="section-intro center"><span class="script">Fresh from the scrapbook</span><h2>Oh, the places we’ll go.</h2><p>Trip stories, useful details, and the things we’d do differently next time.</p></header>
+      <StoryCard story={latest} image="/images/nassau-shark.jpg" featured />
     </section>
 
-    <Footer />
+    <section class="home-destinations page-section coral-section">
+      <header class="section-intro"><span class="kicker">EXPLORE BY PLACE</span><h2>Postcards from<br/>somewhere new.</h2></header>
+      <div class="destination-grid">
+        {destinations.map((place, index) => <a class:list={["destination-card", {tilted:index % 2}]} href={`/destinations/${place.slug}/`}><img src={place.image} alt={`${place.name}, ${place.country}`} loading="lazy"/><span class="destination-stamp">{place.stamp}</span><div><small>{place.country}</small><h3>{place.name}</h3><p>{place.note}</p><b>Open the postcard ↗</b></div></a>)}
+      </div>
+      <a class="text-button" href="/destinations/">See every destination →</a>
+    </section>
+
+    <section class="rise-review page-section">
+      <div class="review-card"><div class="review-copy"><span class="pill">THE RISE REVIEW</span><span class="script">Hero or zero?</span><h2>Our honest take on Amoray Dive Resort.</h2><p>The rooms, the staff, the setting, and the experience—from two travelers who paid attention to the details.</p><a class="primary-button" href="/rise-reviews/">See the full review ↗</a></div><a class="video-poster" href="https://www.youtube.com/watch?v=mUzeW4B3vH8" target="_blank" rel="noreferrer"><img src="/images/nassau-wreck.jpg" alt="Doug and Tara exploring underwater" loading="lazy"/><span>▶</span><small>WATCH ON YOUTUBE</small></a></div>
+    </section>
+
+    <section class="meet-us page-section"><div class="meet-collage"><img src="/images/nassau-diver.jpg" alt="Tara on an underwater adventure" loading="lazy"/><span class="tape"></span><b>same us,<br/>new adventures.</b></div><div><span class="script">Hi, we’re Doug &amp; Tara</span><h2>The kids have their adventures. These are ours.</h2><p>For years, life revolved around the nest. Now we’re finding out what happens when we leave room for detours, new places, and time together.</p><a class="text-button" href="/about/">Meet the Markotts →</a></div></section>
   </main>
+  <Footer />
 </BaseLayout>

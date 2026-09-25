@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+import StoryCard from "../../components/StoryCard.astro";
+import {getPosts} from "../../lib/sanity";
+import {fallbackStory, photos} from "../../lib/site";
+const posts = await getPosts();
+const stories = posts.length ? posts : [fallbackStory];
+---
+<BaseLayout title="Travel Journal | Rise After Nest" description="Travel stories from Doug and Tara’s next chapter.">
+  <Header />
+  <main><PageHero eyebrow="THE TRAVEL JOURNAL" title="Stories worth writing home about." intro="The beautiful parts, the useful details, and the moments that never made the itinerary." color="yellow" />
+    <section class="page-section story-list"><div class="filter-row"><span>ALL STORIES</span><a href="/destinations/">Browse by destination ↗</a></div><div class="story-grid">{stories.map((story, index) => <StoryCard {story} image={index % 2 ? photos.coast : "/images/nassau-shark.jpg"} />)}</div></section>
+  </main><Footer />
+</BaseLayout>

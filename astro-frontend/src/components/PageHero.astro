@@ -1,0 +1,5 @@
+---
+type Props = {eyebrow: string; title: string; intro: string; color?: "cream" | "yellow" | "coral" | "green"};
+const {eyebrow, title, intro, color="cream"} = Astro.props;
+---
+<section class:list={["page-hero", color]}><span class="kicker">{eyebrow}</span><h1>{title}</h1><p>{intro}</p><span class="scribble" aria-hidden="true">↝</span></section>

@@ -1,17 +1,19 @@
 ---
-type Props = {home?: boolean};
-const {home = false} = Astro.props;
-const prefix = home ? "" : "/";
+type Props = {transparent?: boolean};
+const {transparent = false} = Astro.props;
+const path = Astro.url.pathname;
+const items = [
+  {label:"Journal", href:"/journal/", match:"/journal"},
+  {label:"Destinations", href:"/destinations/", match:"/destinations"},
+  {label:"Rise Reviews", href:"/rise-reviews/", match:"/rise-reviews"},
+  {label:"About", href:"/about/", match:"/about"},
+];
 ---
-
-<nav class="nav" aria-label="Main navigation">
-  <a class="brand" href={`${prefix}#top`} aria-label="Rise After Nest home">
-    <span class="sunmark" aria-hidden="true"><i></i></span>
-    <span>RISE <em>AFTER</em> NEST</span>
-  </a>
-  <div class="links">
-    <a href={`${prefix}#stories`}>Stories</a>
-    {home && <a href="#journey">Our map</a>}
-    <a href={`${prefix}#about`}>About</a>
-  </div>
-</nav>
+<header class:list={["site-header", {transparent}]}>
+  <a class="wordmark" href="/" aria-label="Rise After Nest home">rise after nest<span>✳</span></a>
+  <nav class="site-nav" aria-label="Main navigation">
+    {items.map(item => <a href={item.href} aria-current={path.startsWith(item.match) ? "page" : undefined}>{item.label}</a>)}
+  </nav>
+  <a class="header-cta" href="/follow-along/">Follow along ↗</a>
+  <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile navigation">{items.map(item => <a href={item.href}>{item.label}</a>)}<a href="/follow-along/">Follow along</a></nav></details>
+</header>

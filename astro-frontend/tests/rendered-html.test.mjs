@@ -4,22 +4,29 @@ import test from "node:test";
 
 const distRoot = new URL("../dist/client/", import.meta.url);
 
-test("builds the Rise After Nest homepage with production metadata", async () => {
+test("builds the Rise After Nest scrapbook homepage with production metadata", async () => {
   const html = await readFile(new URL("index.html", distRoot), "utf8");
 
-  assert.match(html, /<title>Rise After Nest \| Doug &amp; Tara&#39;s Next Adventure<\/title>/);
-  assert.match(html, /The nest is empty/);
-  assert.match(html, /THE JOURNEY SO FAR/);
-  assert.match(html, /MEET THE MARKOTTS/);
+  assert.match(html, /<title>Rise After Nest \| Travel stories for the next chapter<\/title>/);
+  assert.match(html, /Grown kids/);
+  assert.match(html, /Oh, the places we’ll go/);
+  assert.match(html, /THE RISE REVIEW/);
   assert.match(html, /https:\/\/riseafternest\.com\/og\.png/);
 });
 
-test("hydrates only the interactive trip explorer", async () => {
-  const html = await readFile(new URL("index.html", distRoot), "utf8");
-
-  assert.match(html, /astro-island/);
-  assert.match(html, /client="visible"/);
-  assert.match(html, /TripExplorer/);
+test("emits the complete travel-blog sitemap", async () => {
+  const pages = await Promise.all([
+    "journal/index.html",
+    "destinations/index.html",
+    "destinations/nassau/index.html",
+    "destinations/key-largo/index.html",
+    "rise-reviews/index.html",
+    "about/index.html",
+    "follow-along/index.html",
+  ].map(path => readFile(new URL(path, distRoot), "utf8")));
+  assert.match(pages[0], /Stories worth writing home about/);
+  assert.match(pages[4], /The Rise Review/);
+  assert.match(pages[5], /The story is just getting good/);
 });
 
 test("emits the custom not-found page and crawler files", async () => {
