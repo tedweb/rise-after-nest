@@ -15,6 +15,6 @@ export const fallbackStory = {
 };
 
 export const destinations = [
-  {name:"Nassau", country:"The Bahamas", slug:"nassau", image:"/images/nassau-reef.jpg", note:"Warm water, slow mornings, and one very memorable first chapter.", stamp:"VISITED · 2026"},
+  {name:"Nassau", country:"The Bahamas", slug:"nassau", image:"/images/homepage_candidate5.jpg", note:"Warm water, slow mornings, and one very memorable first chapter.", stamp:"VISITED · 2026"},
   {name:"Key Largo", country:"Florida", slug:"key-largo", image:"/images/nassau-diver.jpg", note:"A laid-back Keys escape with an honest look at Amoray Dive Resort.", stamp:"LATEST TRIP"},
 ];
