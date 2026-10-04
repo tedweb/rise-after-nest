@@ -2,12 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import StoryCard from "../components/StoryCard.astro";
-import {getPosts} from "../lib/sanity";
-import {destinations, fallbackStory} from "../lib/site";
+import {destinations} from "../lib/site";
 
-const posts = await getPosts();
-const latest = posts[0] ?? fallbackStory;
 ---
 <BaseLayout title="Rise After Nest | Travel stories for the next chapter" description="Doug and Tara share empty-nest travel stories, honest Rise Reviews, memorable stays, and new adventures together.">
   <Header />
@@ -17,7 +13,6 @@ const latest = posts[0] ?? fallbackStory;
         <span class="script">Two tickets to whatever’s next.</span>
         <h1>Grown kids.<br/>Big world.<br/><em>Let’s go!</em></h1>
         <p>We’re Doug &amp; Tara, collecting new favorite places, honest travel lessons, and plenty of “remember when?” moments.</p>
-        <a class="primary-button" href="/journal/">Open our travel journal ↗</a>
         <span class="doodle">less routine, more “why not?” ⤴</span>
       </div>
       <div class="hero-collage" aria-label="A scrapbook of travel memories">
@@ -30,9 +25,8 @@ const latest = posts[0] ?? fallbackStory;
 
     <div class="ticker" aria-hidden="true">NEW PLACES ✳ LITTLE JOYS ✳ GOOD FOOD ✳ TOGETHER TIME ✳ NEW PLACES ✳ LITTLE JOYS ✳</div>
 
-    <section class="home-latest page-section">
-      <header class="section-intro center"><span class="script">Fresh from the scrapbook</span><h2>Oh, the places we’ll go.</h2><p>Trip stories, useful details, and the things we’d do differently next time.</p></header>
-      <StoryCard story={latest} image="/images/nassau-shark.jpg" featured />
+    <section class="rise-review page-section">
+      <div class="review-card"><div class="review-copy"><span class="pill">THE RISE REVIEW</span><span class="script">Hero or zero?</span><h2>Our honest take on Amoray Dive Resort.</h2><p>The rooms, the staff, the setting, and the experience—from two travelers who paid attention to the details.</p><a class="primary-button" href="/rise-reviews/">See the full review ↗</a></div><a class="video-poster" href="https://www.youtube.com/watch?v=mUzeW4B3vH8" target="_blank" rel="noreferrer"><img src="/images/yt_channel_image1.jpg" alt="Key Largo Hero or Zero video featuring Doug and Tara at Amoray Dive Resort" loading="lazy"/><span>▶</span><small>WATCH ON YOUTUBE</small></a></div>
     </section>
 
     <section class="home-destinations page-section coral-section">
@@ -41,10 +35,6 @@ const latest = posts[0] ?? fallbackStory;
         {destinations.map((place, index) => <a class:list={["destination-card", {tilted:index % 2}]} href={`/destinations/${place.slug}/`}><img src={place.image} alt={`${place.name}, ${place.country}`} loading="lazy"/><span class="destination-stamp">{place.stamp}</span><div><small>{place.country}</small><h3>{place.name}</h3><p>{place.note}</p><b>Open the postcard ↗</b></div></a>)}
       </div>
       <a class="text-button" href="/destinations/">See every destination →</a>
-    </section>
-
-    <section class="rise-review page-section">
-      <div class="review-card"><div class="review-copy"><span class="pill">THE RISE REVIEW</span><span class="script">Hero or zero?</span><h2>Our honest take on Amoray Dive Resort.</h2><p>The rooms, the staff, the setting, and the experience—from two travelers who paid attention to the details.</p><a class="primary-button" href="/rise-reviews/">See the full review ↗</a></div><a class="video-poster" href="https://www.youtube.com/watch?v=mUzeW4B3vH8" target="_blank" rel="noreferrer"><img src="/images/yt_channel_image1.jpg" alt="Key Largo Hero or Zero video featuring Doug and Tara at Amoray Dive Resort" loading="lazy"/><span>▶</span><small>WATCH ON YOUTUBE</small></a></div>
     </section>
 
     <section class="meet-us page-section"><div class="meet-collage"><img src="/images/homepage_candidate3.jpg" alt="Doug and Tara enjoying an adventure together" loading="lazy"/><span class="tape"></span><b>same us,<br/>new adventures.</b></div><div><span class="script">Hi, we’re Doug &amp; Tara</span><h2>The kids have their adventures. These are ours.</h2><p>For years, life revolved around the nest. Now we’re finding out what happens when we leave room for detours, new places, and time together.</p><a class="text-button" href="/about/">Meet the Markotts →</a></div></section>

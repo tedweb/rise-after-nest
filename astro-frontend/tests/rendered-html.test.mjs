@@ -9,8 +9,9 @@ test("builds the Rise After Nest scrapbook homepage with production metadata", a
 
   assert.match(html, /<title>Rise After Nest \| Travel stories for the next chapter<\/title>/);
   assert.match(html, /Grown kids/);
-  assert.match(html, /Oh, the places we’ll go/);
   assert.match(html, /THE RISE REVIEW/);
+  assert.doesNotMatch(html, /Oh, the places we’ll go/);
+  assert.ok(html.indexOf("THE RISE REVIEW") < html.indexOf("EXPLORE BY PLACE"));
   assert.match(html, /https:\/\/riseafternest\.com\/og\.png/);
 });
 

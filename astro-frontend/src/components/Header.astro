@@ -3,10 +3,9 @@ type Props = {transparent?: boolean};
 const {transparent = false} = Astro.props;
 const path = Astro.url.pathname;
 const items = [
-  {label:"Journal", href:"/journal/", match:"/journal"},
-  {label:"Destinations", href:"/destinations/", match:"/destinations"},
+  {label:"Post Cards", href:"/destinations/", match:"/destinations"},
   {label:"Rise Reviews", href:"/rise-reviews/", match:"/rise-reviews"},
-  {label:"About", href:"/about/", match:"/about"},
+  {label:"Meet the Markotts", href:"/about/", match:"/about"},
 ];
 ---
 <header class:list={["site-header", {transparent}]}>
@@ -14,6 +13,8 @@ const items = [
   <nav class="site-nav" aria-label="Main navigation">
     {items.map(item => <a href={item.href} aria-current={path.startsWith(item.match) ? "page" : undefined}>{item.label}</a>)}
   </nav>
-  <a class="header-cta" href="/follow-along/">Follow along ↗</a>
-  <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile navigation">{items.map(item => <a href={item.href}>{item.label}</a>)}<a href="/follow-along/">Follow along</a></nav></details>
+  <div class="header-actions">
+    <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile navigation">{items.map(item => <a href={item.href}>{item.label}</a>)}</nav></details>
+    <a class="header-cta" href="/follow-along/">Follow along ↗</a>
+  </div>
 </header>

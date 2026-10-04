@@ -17,7 +17,7 @@ export default defineConfig({
   }),
   vite: {
     optimizeDeps: {
-      exclude: ["astro/app/manifest", "astro/assets/services/noop"],
+      exclude: ["astro/app/manifest", "astro/assets/services/noop", "@sanity/client"],
     },
   },
   integrations: [
